@@ -16,7 +16,6 @@ public class CategoryDAO implements DAOInterface<Category> {
 		try {
 			this.connection = DbUtil.getConnection();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -40,7 +39,7 @@ public class CategoryDAO implements DAOInterface<Category> {
 		
 		try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("UPDATE CATALOGDB.Category SET NAME=?, WHERE ID=?");
+                    .prepareStatement("UPDATE CATALOGDB.Category SET categoryName=? WHERE categoryId=?");
             preparedStatement.setString(1, category.getName());
             preparedStatement.setInt(2, category.getId());
             
@@ -55,7 +54,7 @@ public class CategoryDAO implements DAOInterface<Category> {
 	public void delete(Category category) {
 		try {
         	PreparedStatement preparedStatement = connection
-                    .prepareStatement("DELETE FROM CATALOGDB.Category WHERE ID=?");
+                    .prepareStatement("DELETE FROM CATALOGDB.Category WHERE categoryId=?");
             preparedStatement.setInt(1, category.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -72,14 +71,14 @@ public class CategoryDAO implements DAOInterface<Category> {
         
     	try {
             PreparedStatement preparedStatement = connection.
-                    prepareStatement("SELECT * FROM CATALOGDB.Category WHERE ID=?");
+                    prepareStatement("SELECT * FROM CATALOGDB.Category WHERE categoryId=?");
             
             preparedStatement.setLong(1, category.getId());
             ResultSet rs = preparedStatement.executeQuery();
            
             if (rs.next()) {
-                c.setId(rs.getInt("ID"));
-                c.setName(rs.getString("NAME"));
+                c.setId(rs.getInt("categoryId"));
+                c.setName(rs.getString("categoryName"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -100,8 +99,8 @@ public class CategoryDAO implements DAOInterface<Category> {
                 
             	Category c = new Category();
                 
-            	c.setId(rs.getInt("ID"));
-                c.setName(rs.getString("NAME"));
+            	c.setId(rs.getInt("categoryId"));
+                c.setName(rs.getString("categoryName"));
 
                 cList.add(c);
             }
