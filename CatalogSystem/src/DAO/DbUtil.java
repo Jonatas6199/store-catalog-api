@@ -18,7 +18,7 @@ public class DbUtil {
             Class.forName(driverName);
             String serverName = "127.0.0.1:3306";
             //String serverName = "keys.mobilemed.com.br:3377";
-            String mydatabase ="CatalogDB";
+            String mydatabase ="CATALOGDB";
             String url = "jdbc:mysql://" + serverName + "/" + mydatabase;
             String username = "root";
             String password = "teRMo2020+ec7";

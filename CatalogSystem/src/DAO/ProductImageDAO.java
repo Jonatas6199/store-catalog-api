@@ -74,7 +74,7 @@ public class ProductImageDAO implements DAOInterface<ProductImage> {
         
     	try {
             PreparedStatement preparedStatement = connection.
-                    prepareStatement("SELECT * FROM CATALOGDB.ProductImage WHERE productImage=?");
+                    prepareStatement("SELECT * FROM CATALOGDB.ProductImage WHERE imageId=?");
             
             preparedStatement.setLong(1, productImage.getId());
             ResultSet rs = preparedStatement.executeQuery();

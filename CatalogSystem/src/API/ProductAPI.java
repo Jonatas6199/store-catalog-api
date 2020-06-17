@@ -74,7 +74,9 @@ public class ProductAPI extends HttpServlet {
 			p.setName(request.getParameter("productName"));
 			p.setDescription(request.getParameter("productDescription"));
 			p.setPrice(Double.parseDouble(request.getParameter("productPrice")));
-			p.setCategoryId(Integer.parseInt("categoryId"));
+			p.setCategoryId(Integer.parseInt(request.getParameter("categoryId")));
+			
+			System.out.println("---> " + request.getParameter("categoryId"));
 			
 			ProductDAO productDAO = new ProductDAO();
 			productDAO.insert(p);
@@ -91,7 +93,7 @@ public class ProductAPI extends HttpServlet {
 			p.setName(request.getParameter("productName"));
 			p.setDescription(request.getParameter("productDescription"));
 			p.setPrice(Double.parseDouble(request.getParameter("productPrice")));
-			p.setCategoryId(Integer.parseInt("categoryId"));
+			p.setCategoryId(Integer.parseInt(request.getParameter("categoryId")));
 			
 			ProductDAO productDAO = new ProductDAO();
 			productDAO.update(p);

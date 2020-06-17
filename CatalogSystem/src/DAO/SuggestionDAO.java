@@ -44,6 +44,7 @@ public class SuggestionDAO implements DAOInterface<Suggestion> {
                     				+ "WHERE suggestionId = ?");
             preparedStatement.setString(1, suggestion.getSuggestionDescription());
             preparedStatement.setInt(2, suggestion.getUserId());
+            preparedStatement.setInt(3, suggestion.getId());
             
             preparedStatement.executeUpdate();
 

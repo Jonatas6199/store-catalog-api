@@ -97,7 +97,7 @@ public class ContactDAO implements DAOInterface<Contact> {
                 c.setFacebook(rs.getString("contactFaceBook"));
                 c.setInstagram(rs.getString("contactInstagram"));
                 c.setTwitter(rs.getString("contactTwitter"));
-                c.setyoutube(rs.getString("contactYotube"));
+                c.setyoutube(rs.getString("contactYoutube"));
             }
         } catch (SQLException e) {
             e.printStackTrace();

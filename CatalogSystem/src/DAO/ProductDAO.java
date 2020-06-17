@@ -24,7 +24,7 @@ public class ProductDAO implements DAOInterface<Product> {
 	public void insert(Product product) {
 		try {
             PreparedStatement preparedStatement = connection
-            		.prepareStatement("INSERT INTO CATALOGDB.Product (productName, productDescription, productPrice, "
+            		.prepareStatement("INSERT INTO CatalogDB.Product (productName, productDescription, productPrice, "
             				+ "categoryId) VALUES (?, ?, ?, ?)");
 
             preparedStatement.setString(1, product.getName());
@@ -45,8 +45,8 @@ public class ProductDAO implements DAOInterface<Product> {
 		
 		try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("UPDATE CATALOGDB.Product SET productName = ?, productDescription = ?, "
-                    		+ "productPrice = ?, categoryId = ? WHERE contactId = ?");
+                    .prepareStatement("UPDATE CatalogDB.Product SET productName = ?, productDescription = ?, "
+                    		+ "productPrice = ?, categoryId = ? WHERE productId = ?");
             preparedStatement.setString(1, product.getName());
             preparedStatement.setString(2, product.getDescription());
             preparedStatement.setDouble(3, product.getPrice());
@@ -64,7 +64,7 @@ public class ProductDAO implements DAOInterface<Product> {
 	public void delete(Product product) {
 		try {
         	PreparedStatement preparedStatement = connection
-                    .prepareStatement("DELETE FROM CATALOGDB.Product WHERE productId=?");
+                    .prepareStatement("DELETE FROM CatalogDB.Product WHERE productId=?");
             preparedStatement.setInt(1, product.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -81,7 +81,7 @@ public class ProductDAO implements DAOInterface<Product> {
         
     	try {
             PreparedStatement preparedStatement = connection.
-                    prepareStatement("SELECT * FROM CATALOGDB.Product WHERE productId=?");
+                    prepareStatement("SELECT * FROM CatalogDB.Product WHERE productId=?");
             
             preparedStatement.setLong(1, product.getId());
             ResultSet rs = preparedStatement.executeQuery();
@@ -107,7 +107,7 @@ public class ProductDAO implements DAOInterface<Product> {
 		ArrayList<Product> pList = new ArrayList<Product>(); 
         try {     	
             Statement statement = connection.createStatement();           
-            ResultSet rs = statement.executeQuery("SELECT * FROM CATALOGDB.Product");
+            ResultSet rs = statement.executeQuery("SELECT * FROM CatalogDB.Product");
             while (rs.next()) {
                 
             	Product p = new Product();
