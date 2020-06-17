@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DAO.SuggestionDAO;
+import VO.Suggestion;
+
 /**
  * Servlet implementation class SuggestionAPI
  */
@@ -45,26 +48,49 @@ public class SuggestionAPI extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		Suggestion s = new Suggestion();
+		try {
+			s.setSuggestionDescription(request.getParameter("suggestionDescription"));
+			s.setUserId(Integer.parseInt(request.getParameter("userId")));
+			
+			SuggestionDAO suggestionDAO = new SuggestionDAO();
+			suggestionDAO.insert(s);
+			
+			response.getWriter().append("Suggestion criado com sucesso!!!");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	/**
-	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
-	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		Suggestion s = new Suggestion();
+		try {
+			s.setId(Integer.parseInt(request.getParameter("suggestionId")));
+			s.setSuggestionDescription(request.getParameter("suggestionDescription"));
+			s.setUserId(Integer.parseInt(request.getParameter("userId")));
+			
+			SuggestionDAO suggestionDAO = new SuggestionDAO();
+			suggestionDAO.update(s);
+
+			response.getWriter().append("Suggestion atualizado com sucesso!!!");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	/**
-	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
-	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		Suggestion s = new Suggestion();
+
+		try {
+			s.setId(Integer.parseInt(request.getParameter("suggestionId")));
+			
+			SuggestionDAO suggestionDAO = new SuggestionDAO();
+			suggestionDAO.update(s);
+			response.getWriter().append("Suggestion deletado com sucesso!!!");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

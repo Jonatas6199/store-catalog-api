@@ -8,9 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.CategoryDAO;
 import DAO.ProductDAO;
-import VO.Category;
 import VO.Product;
 
 /**

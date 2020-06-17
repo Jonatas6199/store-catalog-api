@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DAO.ProductImageDAO;
+import VO.ProductImage;
+
 /**
  * Servlet implementation class ProductImageAPI
  */
@@ -45,26 +48,48 @@ public class ProductImageAPI extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		ProductImage pi = new ProductImage();
+		try {
+			pi.setImagePath(request.getParameter("imagePath"));
+			pi.setProductId(Integer.parseInt(request.getParameter("productId")));
+			
+			ProductImageDAO productImageDAO = new ProductImageDAO();
+			productImageDAO.insert(pi);
+			
+			response.getWriter().append("ProductImage criado com sucesso!!!");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	/**
-	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
-	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		ProductImage pi = new ProductImage();
+		try {
+			pi.setId(Integer.parseInt(request.getParameter("imageId")));
+			pi.setImagePath(request.getParameter("imagePath"));
+			pi.setProductId(Integer.parseInt(request.getParameter("productId")));
+			
+			ProductImageDAO productImageDAO = new ProductImageDAO();
+			productImageDAO.update(pi);
+
+			response.getWriter().append("ProductImage atualizado com sucesso!!!");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	/**
-	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
-	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		ProductImage pi = new ProductImage();
+
+		try {
+			pi.setId(Integer.parseInt(request.getParameter("imageId")));
+			ProductImageDAO productImageDAO = new ProductImageDAO();
+			productImageDAO.delete(pi);
+			response.getWriter().append("ProductImage deletado com sucesso!!!");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
