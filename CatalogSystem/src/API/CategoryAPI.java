@@ -44,8 +44,6 @@ public class CategoryAPI extends HttpServlet {
 		try {
 			c.setId(fazAi(request.getParameter("ID")));
 			CategoryDAO categoryDAO = new CategoryDAO();
-			String jsonReturnedString =  Methods.convertToJson(c);
-			//response.setBody(jsonReturnedString);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
