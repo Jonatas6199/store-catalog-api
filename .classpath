@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="CatalogSystem/src/" kind="src" path=""/>
+	<classpathentry kind="src" path="CatalogSystem/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/home/lucas/Downloads/gson-2.3.1.jar"/>
+	<classpathentry kind="output" path="CatalogSystem/build/classes"/>
+</classpath>
