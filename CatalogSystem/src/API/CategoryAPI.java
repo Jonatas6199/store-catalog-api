@@ -1,8 +1,7 @@
 package API;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.stream.Collectors;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -11,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Controller.Methods;
 import DAO.CategoryDAO;
 import VO.Category;
 
@@ -31,49 +31,49 @@ public class CategoryAPI extends HttpServlet {
 		// TODO Auto-generated method stub
 	}
 	
-	private int fazAi(String a) {
-		try {
-			return Integer.parseInt(a);
-		} catch(Exception e) {
-			return 1;
-		}
-	}
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Category c = new Category();
+		CategoryDAO categoryDAO = new CategoryDAO(); 
 		try {
-			c.setId(fazAi(request.getParameter("ID")));
-			CategoryDAO categoryDAO = new CategoryDAO();
+			if(request.getParameterMap().containsKey("categoryId")) {
+				String value = request.getParameter("categoryId");
+				int intValue = Integer.parseInt(value);
+				Category aux = new Category();
+				aux.setId(intValue);
+				aux = categoryDAO.find(aux);
+				
+				//response.getWriter().ap
+				
+				String jsonReturnedString =  Methods.convertToJson(aux);
+				PrintWriter pw = response.getWriter();
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				pw.print(jsonReturnedString);
+				pw.flush();
+				//response.setBody(jsonReturnedString);
+			}
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		// request.getParameter("ID")
-		
-		// Json jsonCategories = CategoryController.selectCategory();
-		// response.Bla(jsonCategories);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Category c = new Category();
 		try {
-			c.setName(request.getParameter("NAME"));
+			c.setName(request.getParameter("categoryName"));
 			CategoryDAO categoryDAO = new CategoryDAO();
 			categoryDAO.insert(c);
 			response.getWriter().append("Category criado com sucesso!!!");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		// BufferedReader x = request.getReader();
-		// var test = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
-		// System.out.println(test);
 	}
 
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Category c = new Category();
 		try {
-			c.setId(Integer.parseInt(request.getParameter("ID")));
-			c.setName(request.getParameter("NAME"));
+			c.setId(Integer.parseInt(request.getParameter("categoryId")));
+			c.setName(request.getParameter("categoryName"));
 			CategoryDAO categoryDAO = new CategoryDAO();
 			categoryDAO.update(c);
 			response.getWriter().append("Category atualizado com sucesso!!!");
@@ -86,7 +86,7 @@ public class CategoryAPI extends HttpServlet {
 		Category c = new Category();
 
 		try {
-			c.setId(Integer.parseInt(request.getParameter("ID")));
+			c.setId(Integer.parseInt(request.getParameter("categoryId")));
 			CategoryDAO categoryDAO = new CategoryDAO();
 			categoryDAO.delete(c);
 			response.getWriter().append("Category deletado com sucesso!!!");
