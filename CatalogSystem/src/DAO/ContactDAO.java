@@ -109,7 +109,7 @@ public class ContactDAO implements DAOInterface<Contact> {
 	}
 
 	@Override
-	public ArrayList<Contact> findAll(Contact contact) {
+	public ArrayList<Contact> findAll() {
 		ArrayList<Contact> cList = new ArrayList<Contact>(); 
         try {     	
             Statement statement = connection.createStatement();           

@@ -94,7 +94,7 @@ public class ProductImageDAO implements DAOInterface<ProductImage> {
 	}
 
 	@Override
-	public ArrayList<ProductImage> findAll(ProductImage productImage) {
+	public ArrayList<ProductImage> findAll() {
 		ArrayList<ProductImage> piList = new ArrayList<ProductImage>(); 
         try {     	
             Statement statement = connection.createStatement();           

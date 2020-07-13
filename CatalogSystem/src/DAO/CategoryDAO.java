@@ -90,7 +90,7 @@ public class CategoryDAO implements DAOInterface<Category> {
 	}
 
 	@Override
-	public ArrayList<Category> findAll(Category category) {
+	public ArrayList<Category> findAll() {
 		ArrayList<Category> cList = new ArrayList<Category>(); 
         try {     	
             Statement statement = connection.createStatement();           

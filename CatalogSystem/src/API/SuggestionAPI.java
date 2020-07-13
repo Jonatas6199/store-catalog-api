@@ -2,6 +2,7 @@ package API;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -55,6 +56,15 @@ public class SuggestionAPI extends HttpServlet {
 				Suggestion aux = new Suggestion();
 				aux.setId(intValue);
 				aux = suggestionDAO.find(aux);
+				String jsonReturnedString =  Methods.convertToJson(aux);
+				PrintWriter pw = response.getWriter();
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				pw.print(jsonReturnedString);
+				pw.flush();
+			}
+			else {
+				ArrayList<Suggestion> aux = suggestionDAO.findAll();
 				String jsonReturnedString =  Methods.convertToJson(aux);
 				PrintWriter pw = response.getWriter();
 				response.setContentType("application/json");

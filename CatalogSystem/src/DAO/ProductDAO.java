@@ -103,7 +103,7 @@ public class ProductDAO implements DAOInterface<Product> {
 	}
 
 	@Override
-	public ArrayList<Product> findAll(Product product) {
+	public ArrayList<Product> findAll() {
 		ArrayList<Product> pList = new ArrayList<Product>(); 
         try {     	
             Statement statement = connection.createStatement();           

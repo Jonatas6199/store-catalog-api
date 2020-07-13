@@ -2,6 +2,7 @@ package API;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -55,6 +56,15 @@ public class ContactAPI extends HttpServlet {
 				Contact aux = new Contact();
 				aux.setId(intValue);
 				aux = contactDAO.find(aux);
+				String jsonReturnedString =  Methods.convertToJson(aux);
+				PrintWriter pw = response.getWriter();
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				pw.print(jsonReturnedString);
+				pw.flush();
+			}
+			else {
+				ArrayList<Contact> aux = contactDAO.findAll();
 				String jsonReturnedString =  Methods.convertToJson(aux);
 				PrintWriter pw = response.getWriter();
 				response.setContentType("application/json");

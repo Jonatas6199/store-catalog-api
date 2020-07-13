@@ -103,7 +103,7 @@ public class CatalogUserDAO implements DAOInterface<CatalogUser> {
 	}
 
 	@Override
-	public ArrayList<CatalogUser> findAll(CatalogUser catalogUser) {
+	public ArrayList<CatalogUser> findAll() {
 		ArrayList<CatalogUser> cuList = new ArrayList<CatalogUser>(); 
         try {     	
             Statement statement = connection.createStatement();           
@@ -127,4 +127,32 @@ public class CatalogUserDAO implements DAOInterface<CatalogUser> {
 		}
         return cuList;
 	}	
+	
+	public CatalogUser findByUserAndPassword(CatalogUser catalogUser) {
+		
+		CatalogUser cu = new CatalogUser();
+        
+    	try {
+            PreparedStatement preparedStatement = connection.
+                    prepareStatement("SELECT * FROM CATALOGDB.CatalogUser WHERE userEmail = ? AND userPassword = ?");
+            
+            preparedStatement.setString(1, catalogUser.getUserEmail());
+            preparedStatement.setString(2, catalogUser.getUserPassword());
+            ResultSet rs = preparedStatement.executeQuery();
+            
+            if (rs.next()) {
+            	cu.setId(rs.getInt("userId"));
+            	cu.setUserEmail(rs.getString("userEmail"));
+            	cu.setUserPassword(rs.getString("userPassword"));
+            	cu.setUserName(rs.getString("userName"));
+            	cu.setIsAdmin(rs.getInt("isAdmin"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+			e.printStackTrace();
+		}
+
+        return cu;	
+	}
 }

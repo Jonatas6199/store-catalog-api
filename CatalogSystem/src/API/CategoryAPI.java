@@ -2,6 +2,7 @@ package API;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -40,6 +41,15 @@ public class CategoryAPI extends HttpServlet {
 				Category aux = new Category();
 				aux.setId(intValue);
 				aux = categoryDAO.find(aux);
+				String jsonReturnedString =  Methods.convertToJson(aux);
+				PrintWriter pw = response.getWriter();
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				pw.print(jsonReturnedString);
+				pw.flush();
+			}
+			else {
+				ArrayList<Category> aux = categoryDAO.findAll();
 				String jsonReturnedString =  Methods.convertToJson(aux);
 				PrintWriter pw = response.getWriter();
 				response.setContentType("application/json");

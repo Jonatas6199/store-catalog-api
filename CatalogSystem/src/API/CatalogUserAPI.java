@@ -2,6 +2,7 @@ package API;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -55,6 +56,31 @@ public class CatalogUserAPI extends HttpServlet {
 				CatalogUser aux = new CatalogUser();
 				aux.setId(intValue);
 				aux = catalogUserDAO.find(aux);
+				String jsonReturnedString =  Methods.convertToJson(aux);
+				PrintWriter pw = response.getWriter();
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				pw.print(jsonReturnedString);
+				pw.flush();
+			}
+			else if (request.getParameterMap().containsKey("userEmail") && 
+					 request.getParameterMap().containsKey("userPassword")) {
+				String email = request.getParameter("userEmail");
+				String passwd = request.getParameter("userPassword");
+				CatalogUser aux = new CatalogUser();
+				aux.setUserEmail(email);
+				aux.setUserPassword(passwd);
+				
+				aux = catalogUserDAO.findByUserAndPassword(aux);
+				String jsonReturnedString =  Methods.convertToJson(aux);
+				PrintWriter pw = response.getWriter();
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				pw.print(jsonReturnedString);
+				pw.flush();
+			}
+			else {
+				ArrayList<CatalogUser> aux = catalogUserDAO.findAll();
 				String jsonReturnedString =  Methods.convertToJson(aux);
 				PrintWriter pw = response.getWriter();
 				response.setContentType("application/json");

@@ -94,7 +94,7 @@ public class SuggestionDAO implements DAOInterface<Suggestion> {
 	}
 
 	@Override
-	public ArrayList<Suggestion> findAll(Suggestion suggestion) {
+	public ArrayList<Suggestion> findAll() {
 		ArrayList<Suggestion> sList = new ArrayList<Suggestion>(); 
         try {     	
             Statement statement = connection.createStatement();           
